@@ -57,6 +57,26 @@ services:
       PYTHONUNBUFFERED: 1
     restart: always
 
+  worker1:
+    build: ./worker1
+    depends_on:
+      - mongo
+      - rabbitmq
+    networks:
+      - app-net
+    env_file:
+      - .env
+    environment:
+      MONGO_URI: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/"
+      DB_NAME: "${DB_NAME}"
+      RABBIT_HOST: "${RABBIT_HOST}"
+      RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+      RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+      ROUTER_USER: "${ROUTER_USER}"
+      ROUTER_PASS: "${ROUTER_PASS}"
+      PYTHONUNBUFFERED: 1
+    restart: always
+
 volumes:
   mongo-data:
   rabbitmq-data:

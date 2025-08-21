@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Router Detail - {{ router_ip }}</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <h1>Router: {{ router_ip }}</h1>
+    <h2>Update Every 10 Seconds with 3 Document.</h2>
+    {% if status_data %}
+        <table border="1" cellpadding="5">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Interface</th>
+                    <th>IP Address</th>
+                    <th>Status</th>
+                    <th>Protocol</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# Outer loop for each document (timestamp group) #}
+                {% for doc in status_data %}
+                    {# Inner loop for each interface within that document #}
+                    {% for intf in doc.interfaces %}
+                    <tr>
+                        <td>{{ doc.timestamp }}</td>
+                        <td>{{ intf.interface }}</td>
+                        <td>{{ intf.ip_address }}</td>
+                        <td>{{ intf.status }}</td>
+                        <td>{{ intf.proto }}</td>
+                    </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No status data found.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('main') }}">Back to router list</a></p>
+</body>
+</html>
