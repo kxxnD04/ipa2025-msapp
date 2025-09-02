@@ -55,7 +55,6 @@ def callback(ch, method, properties, body):
         data = get_ip_interfaces(router_name, router_ip)
 
         # Add timestamp
-        thailand_tz = pytz.timezone("Asia/Bangkok")
         data["timestamp"] = datetime.now(pytz.timezone("Asia/Bangkok")).strftime(
             "%Y-%m-%d %H:%M:%S"
         )
