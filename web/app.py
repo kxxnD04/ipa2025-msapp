@@ -12,11 +12,13 @@ status_col = db["router_status"]  # collection ของ interface status
 
 app = Flask(__name__)
 
+
 # หน้า list routers
 @app.route("/")
 def main():
     routers = list(routers_col.find())
     return render_template("index.html", routers=routers)
+
 
 # เพิ่ม router
 @app.route("/add", methods=["POST"])
@@ -32,6 +34,7 @@ def add_router():
         })
     return redirect(url_for("main"))
 
+
 # ลบ router
 @app.route("/delete", methods=["POST"])
 def delete_router():
@@ -43,16 +46,20 @@ def delete_router():
             pass
     return redirect(url_for("main"))
 
+
 # หน้าแสดง interface status ของ router
 @app.route("/router/<router_ip>")
 @app.route("/router/<router_ip>")
 def router_detail(router_ip):
     # ดึงข้อมูลล่าสุด 3 documents ของ router จาก collection router_status
     # Sort by timestamp in descending order and limit to 3
-    status_data = list(status_col.find({"router_ip": router_ip}).sort("timestamp", -1).limit(3))
-    
+    status_data = list(status_col.find({"router_ip": router_ip}).sort\
+("timestamp", -1).limit(3))
+
     # Pass the entire list of documents to the template
-    return render_template("router_detail.html", router_ip=router_ip, status_data=status_data)
+    return render_template("router_detail.html"\
+, router_ip=router_ip, status_data=status_data)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)

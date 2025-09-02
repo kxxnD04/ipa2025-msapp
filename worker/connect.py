@@ -38,6 +38,7 @@ BASE_PARAMS = {
     },
 }
 
+
 def get_ip_interfaces(name, ip):
     print(f"\nConnecting to {name} ({ip})...")
     params = BASE_PARAMS.copy()
@@ -54,17 +55,13 @@ def get_ip_interfaces(name, ip):
         data=output
     )
 
-    # uptime
-    # version_output = conn.send_command("show version")
-    # uptime_line = next((line for line in version_output.splitlines() if "uptime is" in line), "")
-    # uptime = uptime_line.split(" uptime is ")[1] if uptime_line else "Unknown"
-
     conn.disconnect()
 
     return {
         "router_ip": ip,
         "interfaces": interfaces,
     }
+
 
 if __name__ == "__main__":
     for name, ip in devices.items():

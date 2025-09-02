@@ -15,7 +15,7 @@
 #     while True:
 #         now = time.time()
 #         now_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now))
-#         ms = int((now % 1) * 1000)  
+#         ms = int((now % 1) * 1000)
 #         now_str_with_ms = f"{now_str}.{ms:03d}"
 #         print(f"[{now_str_with_ms}] run #{count}")
 
@@ -40,6 +40,7 @@ from database import get_router_info
 
 
 RABBIT_HOST = os.getenv("RABBIT_HOST")
+
 
 def scheduler():
     INTERVAL = 10.0
@@ -70,12 +71,13 @@ def scheduler():
                 produce(body_bytes)
 
         except Exception as e:
-            print(f"[❌] Error: {e}")
+            print(f"Error: {e}")
             time.sleep(3)
 
         count += 1
         next_run += INTERVAL
         time.sleep(max(0.0, next_run - time.monotonic()))
+
 
 if __name__ == "__main__":
     scheduler()
