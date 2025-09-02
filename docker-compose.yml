@@ -76,6 +76,8 @@ services:
       ROUTER_PASS: "${ROUTER_PASS}"
       PYTHONUNBUFFERED: 1
     restart: always
+    deploy:
+      replicas: 3
 
 volumes:
   mongo-data:

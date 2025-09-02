@@ -56,9 +56,11 @@ def callback(ch, method, properties, body):
 
         # Add timestamp
         thailand_tz = pytz.timezone("Asia/Bangkok")
-        data["timestamp"] = datetime.fromtimestamp(time.time(), tz=pytz.utc).astimezone(
-            thailand_tz
+        data["timestamp"] = datetime.now(pytz.timezone("Asia/Bangkok")).strftime(
+            "%Y-%m-%d %H:%M:%S"
         )
+        print(data["timestamp"])
+        print(type(data["timestamp"]))
         print(data.get("interfaces", []))
         # Save to MongoDB
         collection.insert_one(data)

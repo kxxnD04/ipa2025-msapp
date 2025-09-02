@@ -1,32 +1,49 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Router Manager</title>
     <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
-    <h1>Register Router</h1>
-    <h2>You are calling me from {{ request.remote_addr }}</h2>
+    <div class="container">
+        <h1>Router Manager</h1>
+        <h2>You are calling me from {{ request.remote_addr }}</h2>
 
-    <form method="POST" action="/add">
-        <input name="ip" placeholder="Router IP" required />
-        <input name="username" placeholder="Username" required />
-        <input type="password" name="password" placeholder="Password" required />
-        <button type="submit">Add Router</button>
-    </form>
+        <div class="main-layout">
 
-    <h2>Router List</h2>
-    <ul>
-        {% for router in routers %}
-          <li>
-            <a href="{{ url_for('router_detail', router_ip=router.ip) }}">
-                {{ router.ip }}
-            </a> - {{ router.username }}
-            <form method="POST" action="{{ url_for('delete_router') }}" style="display:inline">
-              <input type="hidden" name="id" value="{{ router._id }}">
-              <button type="submit">Delete</button>
-            </form>
-          </li>
-        {% endfor %}
-    </ul>
+            <div class="glass-card form-column">
+                <h3>Register New Router</h3>
+                <form method="POST" action="/add">
+                    <input name="ip" placeholder="Router IP" required />
+                    <input name="username" placeholder="Username" required />
+                    <input type="password" name="password" placeholder="Password" required />
+                    <button type="submit">Add Router</button>
+                </form>
+            </div>
+
+            <div class="glass-card">
+                <h3>Router List</h3>
+                <ul>
+                    {% for router in routers %}
+                    <li>
+                        <span>
+                            <a href="{{ url_for('router_detail', router_ip=router.ip) }}">
+                                <strong>{{ router.ip }}</strong>
+                            </a> - {{ router.username }}
+                        </span>
+                        <form method="POST" action="{{ url_for('delete_router') }}" class="inline-form">
+                            <input type="hidden" name="id" value="{{ router._id }}">
+                            <button type="submit" class="btn-delete">Delete</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li>No routers found. Add one on the left!</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div> </div>
 </body>
 </html>

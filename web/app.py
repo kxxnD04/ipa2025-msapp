@@ -47,10 +47,10 @@ def delete_router():
 @app.route("/router/<router_ip>")
 @app.route("/router/<router_ip>")
 def router_detail(router_ip):
-    # ดึงข้อมูลล่าสุด 3 documents ของ router จาก collection router_status
+    # ดึงข้อมูลล่าสุด 5 documents ของ router จาก collection router_status
     # Sort by timestamp in descending order and limit to 3
     status_data = list(
-        status_col.find({"router_ip": router_ip}).sort("timestamp", -1).limit(3)
+        status_col.find({"router_ip": router_ip}).sort("timestamp", -1).limit(5)
     )
 
     # Pass the entire list of documents to the template
