@@ -39,7 +39,7 @@ BASE_PARAMS = {
 }
 
 def get_ip_interfaces(name, ip):
-    print(f"\n[🔌] Connecting to {name} ({ip})...")
+    print(f"\nConnecting to {name} ({ip})...")
     params = BASE_PARAMS.copy()
     params["ip"] = ip
     conn = ConnectHandler(**params)
@@ -69,7 +69,7 @@ def get_ip_interfaces(name, ip):
 if __name__ == "__main__":
     for name, ip in devices.items():
         info = get_ip_interfaces(name, ip)
-        print(f"[✅] {name} ({ip}) uptime: {info['uptime']}")
+        print(f"{name} ({ip}) uptime: {info['uptime']}")
         for intf in info["interfaces"]:
             print(f"   {intf}")
-    print("\n[🏁] All routers checked.")
+    print("\nAll routers checked.")

@@ -57,8 +57,8 @@ services:
       PYTHONUNBUFFERED: 1
     restart: always
 
-  worker1:
-    build: ./worker1
+  worker:
+    build: ./worker
     depends_on:
       - mongo
       - rabbitmq
