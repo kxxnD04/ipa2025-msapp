@@ -27,11 +27,7 @@ def add_router():
     username = request.form.get("username")
     password = request.form.get("password")
     if ip and username and password:
-        routers_col.insert_one({
-            "ip": ip,
-            "username": username,
-            "password": password
-        })
+        routers_col.insert_one({"ip": ip, "username": username, "password": password})
     return redirect(url_for("main"))
 
 
@@ -53,12 +49,14 @@ def delete_router():
 def router_detail(router_ip):
     # ดึงข้อมูลล่าสุด 3 documents ของ router จาก collection router_status
     # Sort by timestamp in descending order and limit to 3
-    status_data = list(status_col.find({"router_ip": router_ip}).sort\
-("timestamp", -1).limit(3))
+    status_data = list(
+        status_col.find({"router_ip": router_ip}).sort("timestamp", -1).limit(3)
+    )
 
     # Pass the entire list of documents to the template
-    return render_template("router_detail.html"\
-, router_ip=router_ip, status_data=status_data)
+    return render_template(
+        "router_detail.html", router_ip=router_ip, status_data=status_data
+    )
 
 
 if __name__ == "__main__":

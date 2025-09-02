@@ -61,7 +61,7 @@ def scheduler():
                     "router_name": router.get("name", "Router"),
                     "router_ip": router.get("ip"),
                     "username": router.get("username", "admin"),
-                    "password": router.get("password", "cisco")
+                    "password": router.get("password", "cisco"),
                 }
 
                 # แปลงเป็น bytes

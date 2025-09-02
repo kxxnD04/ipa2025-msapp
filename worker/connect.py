@@ -50,9 +50,7 @@ def get_ip_interfaces(name, ip):
     output = conn.send_command("show ip interface brief")
 
     interfaces = parse_output(
-        platform="cisco_ios",
-        command="show ip interface brief",
-        data=output
+        platform="cisco_ios", command="show ip interface brief", data=output
     )
 
     conn.disconnect()

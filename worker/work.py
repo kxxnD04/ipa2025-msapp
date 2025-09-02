@@ -25,8 +25,7 @@ credentials = pika.PlainCredentials(RABBIT_USER, RABBIT_PASS)
 while True:
     try:
         connection = pika.BlockingConnection(
-            pika.ConnectionParameters(host=RABBIT_HOST\
-, credentials=credentials)
+            pika.ConnectionParameters(host=RABBIT_HOST, credentials=credentials)
         )
         break
     except pika.exceptions.AMQPConnectionError:
@@ -56,8 +55,10 @@ def callback(ch, method, properties, body):
         data = get_ip_interfaces(router_name, router_ip)
 
         # Add timestamp
-        thailand_tz = pytz.timezone('Asia/Bangkok')
-        data["timestamp"] = datetime.fromtimestamp(time.time(), tz=pytz.utc).astimezone(thailand_tz)
+        thailand_tz = pytz.timezone("Asia/Bangkok")
+        data["timestamp"] = datetime.fromtimestamp(time.time(), tz=pytz.utc).astimezone(
+            thailand_tz
+        )
         print(data.get("interfaces", []))
         # Save to MongoDB
         collection.insert_one(data)
