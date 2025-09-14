@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: ipa.local
+    - host: msapp.ipa.local
       http:
         paths:
           - path: /
