@@ -9,7 +9,7 @@ spec:
     - host: msapp.ipa.local
       http:
         paths:
-          - path: /
+          - path: /msapp
             pathType: Prefix
             backend:
               service:
